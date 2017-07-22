@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using log4net;
+using System.Reflection;
 
 namespace LolApi
 {
-    public class Class1
+    internal class Class1
     {
+        private static readonly MethodBase constructor = MethodBase.GetCurrentMethod();
+        private static readonly ILog log = LogManager.GetLogger(constructor.DeclaringType);
+
+        public Class1()
+        {
+
+        }
     }
 }
