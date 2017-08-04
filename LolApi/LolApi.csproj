@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api.cs" />
     <Compile Include="ChampionList.cs" />
     <Compile Include="Champion.cs" />
     <Compile Include="Match.cs" />

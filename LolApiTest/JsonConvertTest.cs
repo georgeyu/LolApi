@@ -3,7 +3,6 @@ using log4net.Config;
 using LolApi;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using System;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -67,7 +66,7 @@ namespace LolApiTest
         [TestMethod]
         public void DeserializeObject_Champion_Champion()
         {
-            var url = writer.WriteStaticChamps();
+            var url = writer.WriteStaticChampions();
             using (var client = new WebClient())
             {
                 var server = new Server(client);

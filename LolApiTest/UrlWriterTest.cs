@@ -36,7 +36,7 @@ namespace LolApiTest
         [TestMethod]
         public void WriteStaticChamps_None_Write()
         {
-            var url = urlWriter.WriteStaticChamps();
+            var url = urlWriter.WriteStaticChampions();
             Assert.AreEqual(url, StaticChampsUrl);
         }
     }

@@ -47,7 +47,7 @@ namespace LolApi
             return string.Format("{0}/match/v3/matches/{1}?{2}", urlHead, matchID, keyField);
         }
 
-        public string WriteStaticChamps()
+        public string WriteStaticChampions()
         {
             return string.Format("{0}/static-data/v3/champions?locale=en_US&dataById=false&{1}", urlHead, keyField);
         }
