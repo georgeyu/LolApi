@@ -1,6 +1,6 @@
 ﻿namespace LolApi
 {
-    internal class Summoner
+    public class Summoner
     {
         public int profileIconId { get; set; }
         public string name { get; set; }

@@ -2,7 +2,7 @@
 
 namespace LolApi
 {
-    internal class ChampionList
+    public class ChampionList
     {
         public Dictionary<string, Champion> Data { get; set; }
 

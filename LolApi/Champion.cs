@@ -1,6 +1,6 @@
 ﻿namespace LolApi
 {
-    internal class Champion
+    public class Champion
     {
         public int Id { get; set; }
 
