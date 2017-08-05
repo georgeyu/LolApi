@@ -2,7 +2,7 @@
 
 namespace LolApi
 {
-    internal class MatchList
+    public class MatchList
     {
         public List<MatchSummary> matches { get; set; }
         public int startIndex { get; set; }

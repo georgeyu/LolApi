@@ -6,7 +6,7 @@ using System.Net;
 
 namespace LolApi
 {
-    internal class Api
+    public class Api
     {
         private readonly Server server;
         private readonly UrlWriter writer;
