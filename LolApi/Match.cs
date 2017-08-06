@@ -1,16 +1,20 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LolApi
 {
     public class Ban
     {
+        public int ID { get; set; }
         public int championId { get; set; }
         public int pickTurn { get; set; }
     }
 
     public class Team
     {
+        public int ID { get; set; }
         public int teamId { get; set; }
         public string win { get; set; }
         public bool firstBlood { get; set; }
@@ -31,12 +35,14 @@ namespace LolApi
 
     public class Mastery
     {
+        public int ID { get; set; }
         public int masteryId { get; set; }
         public int rank { get; set; }
     }
 
     public class Rune
     {
+        public int ID { get; set; }
         public int runeId { get; set; }
         public int rank { get; set; }
     }
@@ -168,6 +174,19 @@ namespace LolApi
 
     public class Timeline
     {
+        public Timeline()
+        {
+            csDiffPerMinDeltas = new CsDiffPerMinDeltas();
+            xpDiffPerMinDeltas = new XpDiffPerMinDeltas();
+            damageTakenDiffPerMinDeltas = new DamageTakenDiffPerMinDeltas();
+            csDiffPerMinDeltas = new CsDiffPerMinDeltas();
+            creepsPerMinDeltas = new CreepsPerMinDeltas();
+            xpPerMinDeltas = new XpPerMinDeltas();
+            goldPerMinDeltas = new GoldPerMinDeltas();
+            damageTakenPerMinDeltas = new DamageTakenPerMinDeltas();
+        }
+
+        public int ID { get; set; }
         public int participantId { get; set; }
         public CreepsPerMinDeltas creepsPerMinDeltas { get; set; }
         public XpPerMinDeltas xpPerMinDeltas { get; set; }
@@ -182,6 +201,7 @@ namespace LolApi
 
     public class Participant
     {
+        public int ID { get; set; }
         public int participantId { get; set; }
         public int teamId { get; set; }
         public int championId { get; set; }
@@ -208,13 +228,20 @@ namespace LolApi
 
     public class ParticipantIdentity
     {
+        public int ID { get; set; }
         public int participantId { get; set; }
         public Player player { get; set; }
     }
 
     public class Match
     {
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public long gameId { get; set; }
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public string platformId { get; set; }
         public long gameCreation { get; set; }
         public int gameDuration { get; set; }
