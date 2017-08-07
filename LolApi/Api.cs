@@ -24,11 +24,9 @@ namespace LolApi
             NA
         }
 
-        public MatchList GetRankedRiftMatches(string summonerName)
+        public MatchList GetRankedRiftMatchList(string summonerName)
         {
-            var summonerUrl = writer.WriteSummoner(summonerName);
-            var summonerJson = server.Respond(summonerUrl);
-            var summoner = JsonConvert.DeserializeObject<Summoner>(summonerJson);
+            var summoner = GetSummoner(summonerName);
             var accountID = summoner.accountId.ToString();
             var matchListUrl = writer.WriteMatchByAccount(accountID, writer.rankedRiftQueues);
             var matchListJson = server.Respond(matchListUrl);
@@ -42,12 +40,19 @@ namespace LolApi
             return JsonConvert.DeserializeObject<Match>(json);
         }
 
-        public Dictionary<int, string> GetChampionByID()
+        public IEnumerable<Champion> GetChampions()
         {
             var url = writer.WriteStaticChampions();
             var json = server.Respond(url);
             var championList = JsonConvert.DeserializeObject<ChampionList>(json);
-            return championList.Data.ToDictionary(x => x.Value.Id, x => x.Key);
+            return championList.Data.Select(x => x.Value);
+        }
+
+        public Summoner GetSummoner(string name)
+        {
+            var url = writer.WriteSummoner(name);
+            var json = server.Respond(url);
+            return JsonConvert.DeserializeObject<Summoner>(json);
         }
 
         private static string GetDescription<T>(T enumInstance)

@@ -53,9 +53,9 @@ namespace LolApi
                     case BadRequest:
                     case Unauthorized:
                     case Forbidden:
-                    case NotFound:
                         log.FatalFormat("{0} {1}", exception, url);
                         throw e;
+                    case NotFound:
                     case RateLimit:
                     case ServerError:
                         Thread.Sleep(SecsToMillisecs);
