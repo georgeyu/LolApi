@@ -54,22 +54,31 @@ namespace LolApi
                     case Unauthorized:
                     case Forbidden:
                     case NotFound:
-                        log.FatalFormat("{0} {1}", exception, url);
+                        log.Fatal(exception);
+                        log.Fatal(url);
                         throw e;
                     case RateLimit:
-                        log.ErrorFormat("Rate limited. {0} {1}.", exception, url);
+                        log.Error("Rate limit.");
+                        log.Error(exception);
+                        log.Error(url);
                         Thread.Sleep(SecsToMillisecs);
                         break;
                     case ServerError:
-                        log.ErrorFormat("Server error. {0} {1}", exception, url);
+                        log.Error("Server error.");
+                        log.Error(exception);
+                        log.Error(url);
                         Thread.Sleep(SecsToMillisecs);
                         break;
                     case ServiceUnavailable:
-                        log.ErrorFormat("Service unavailable. {0} {1}", exception, url);
+                        log.Error("Service unavailable.");
+                        log.Error(exception);
+                        log.Error(url);
                         Thread.Sleep(MinutesToSecs * SecsToMillisecs);
                         break;
                     default:
-                        log.FatalFormat("Status code not handled. {0}. {1} {2}", statusCode, exception, url);
+                        log.FatalFormat("Status code {0} not handled.", statusCode);
+                        log.Fatal(exception);
+                        log.Fatal(url);
                         throw e;
                 }
                 response = "";
