@@ -2,6 +2,7 @@
 using System.Net;
 using System.Reflection;
 using System.Threading;
+using System;
 
 namespace LolApi
 {
@@ -16,6 +17,7 @@ namespace LolApi
         private const int ServiceUnavailable = 503;
         private const int SecsToMillisecs = 1000;
         private const int MinutesToSecs = 60;
+        private const int SmallerRateLimitSecs = 10;
         private static readonly MethodBase constructor = MethodBase.GetCurrentMethod();
         private static readonly ILog log = LogManager.GetLogger(constructor.DeclaringType);
         private readonly WebClient client;
@@ -54,32 +56,25 @@ namespace LolApi
                     case Unauthorized:
                     case Forbidden:
                     case NotFound:
-                        log.Fatal(exception);
-                        log.Fatal(url);
-                        throw e;
+                        log.ErrorFormat("{0} status code.", statusCode);
+                        log.Error(url);
+                        throw;
                     case RateLimit:
                         log.Error("Rate limit.");
-                        log.Error(exception);
-                        log.Error(url);
-                        Thread.Sleep(SecsToMillisecs);
+                        Thread.Sleep(SmallerRateLimitSecs * SecsToMillisecs);
                         break;
                     case ServerError:
                         log.Error("Server error.");
-                        log.Error(exception);
-                        log.Error(url);
                         Thread.Sleep(SecsToMillisecs);
                         break;
                     case ServiceUnavailable:
                         log.Error("Service unavailable.");
-                        log.Error(exception);
-                        log.Error(url);
                         Thread.Sleep(MinutesToSecs * SecsToMillisecs);
                         break;
                     default:
                         log.FatalFormat("Status code {0} not handled.", statusCode);
-                        log.Fatal(exception);
                         log.Fatal(url);
-                        throw e;
+                        throw;
                 }
                 response = "";
                 return false;

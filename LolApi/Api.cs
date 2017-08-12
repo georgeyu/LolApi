@@ -55,7 +55,7 @@ namespace LolApi
             return JsonConvert.DeserializeObject<Summoner>(json);
         }
 
-        private static string GetDescription<T>(T enumInstance)
+        internal static string GetDescription<T>(T enumInstance)
         {
             var enumString = enumInstance.ToString();
             var enumType = typeof(T);
