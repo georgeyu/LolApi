@@ -53,14 +53,19 @@ namespace LolApi
                     case BadRequest:
                     case Unauthorized:
                     case Forbidden:
+                    case NotFound:
                         log.FatalFormat("{0} {1}", exception, url);
                         throw e;
-                    case NotFound:
                     case RateLimit:
+                        log.ErrorFormat("Rate limited. {0} {1}.", exception, url);
+                        Thread.Sleep(SecsToMillisecs);
+                        break;
                     case ServerError:
+                        log.ErrorFormat("Server error. {0} {1}", exception, url);
                         Thread.Sleep(SecsToMillisecs);
                         break;
                     case ServiceUnavailable:
+                        log.ErrorFormat("Service unavailable. {0} {1}", exception, url);
                         Thread.Sleep(MinutesToSecs * SecsToMillisecs);
                         break;
                     default:
