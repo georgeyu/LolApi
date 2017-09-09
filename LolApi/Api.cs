@@ -55,6 +55,15 @@ namespace LolApi
             return JsonConvert.DeserializeObject<Summoner>(json);
         }
 
+        public IEnumerable<ChampionMastery> GetChampionMasteries(string summonerName)
+        {
+            var summoner = GetSummoner(summonerName);
+            var id = summoner.id.ToString();
+            var masteryUrl = writer.WriteChampionMastery(id);
+            var masteryJson = server.Respond(masteryUrl);
+            return JsonConvert.DeserializeObject<IEnumerable<ChampionMastery>>(masteryJson);
+        }
+
         internal static string GetDescription<T>(T enumInstance)
         {
             var enumString = enumInstance.ToString();

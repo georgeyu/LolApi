@@ -52,6 +52,11 @@ namespace LolApi
             return string.Format("{0}/static-data/v3/champions?locale=en_US&dataById=false&{1}", urlHead, keyField);
         }
 
+        public string WriteChampionMastery(string summonerID)
+        {
+            return string.Format("{0}/champion-mastery/v3/champion-masteries/by-summoner/{1}?{2}", urlHead, summonerID, keyField);
+        }
+
         private string GetQueueField(params string[] queues)
         {
             var fields = queues.Select(x => "queue=" + x);

@@ -50,6 +50,7 @@
     <Compile Include="Api.cs" />
     <Compile Include="ChampionList.cs" />
     <Compile Include="Champion.cs" />
+    <Compile Include="ChampionMastery.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="MatchList.cs" />
     <Compile Include="Server.cs" />
